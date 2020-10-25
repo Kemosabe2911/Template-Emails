@@ -9,6 +9,10 @@ const app= express();
 //EJS
 app.set('view engine','ejs');
 
+// Body-parser middleware 
+app.use(bodyparser.urlencoded({extended:false})) 
+app.use(bodyparser.json()) 
+
 const PORT= process.env.PORT || 5000;
 
 app.get('/',(req,res) =>{
