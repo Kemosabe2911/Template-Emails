@@ -19,6 +19,11 @@ app.get('/',(req,res) =>{
     res.render('index');
 });
 
+
+app.post('/send',(req,res) =>{
+    console.log(req.body);
+});
+
 app.listen(PORT, () =>{
     console.log(`Server Running on port ${PORT}`);
 });
