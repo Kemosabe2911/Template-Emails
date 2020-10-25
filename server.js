@@ -21,7 +21,17 @@ app.get('/',(req,res) =>{
 
 
 app.post('/send',(req,res) =>{
-    console.log(req.body);
+    //console.log(req.body);
+    const output= `
+    <h2> Email Content</h2>
+    <ul>
+        <li>Email: ${req.body.email}</li>
+        <li>Email: ${req.body.phno}</li>
+    </ul>
+    <p>
+        ${req.body.message}
+    </p>
+    `;
 });
 
 app.listen(PORT, () =>{
