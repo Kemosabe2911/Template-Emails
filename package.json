@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Kemosabe2911/Template-Emails/issues"
   },
-  "homepage": "https://github.com/Kemosabe2911/Template-Emails#readme"
+  "homepage": "https://github.com/Kemosabe2911/Template-Emails#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }
