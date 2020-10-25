@@ -28,7 +28,7 @@ app.post('/send',(req,res) =>{
     <h2> Email Content</h2>
     <ul>
         <li>Email: ${req.body.email}</li>
-        <li>Email: ${req.body.phno}</li>
+        <li>Phno: ${req.body.phno}</li>
     </ul>
     <p>
         ${req.body.message}
@@ -41,14 +41,17 @@ app.post('/send',(req,res) =>{
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
-            user: userEmail, // generated ethereal user
-            pass: userPassword, // generated ethereal password
+            user: 'itsmestevin29@gmail.com', // generated ethereal user
+            pass: 'stevin@2911', // generated ethereal password
             },
+            tls:{
+                rejectUnauthorized: false
+            }
         });
 
         // send mail with defined transport object
-        let info = await transporter.sendMail({
-            from: `"Template Email" <${userEmail}>`, // sender address
+        let info = transporter.sendMail({
+            from: '"Template Email" <itsmestevin29@gmail.com>', // sender address
             to: `${req.body.email}`, // list of receivers
             subject: "Test Email", // Subject line
             text: "Hello world?", // plain text body
@@ -62,7 +65,11 @@ app.post('/send',(req,res) =>{
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
-        main().catch(console.error);
+        //main().catch(console.error);
+
+        res.render("index", {
+            msg: "Email Sent Succefull"
+        })
 
 });
 
