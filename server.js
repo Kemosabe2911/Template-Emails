@@ -2,6 +2,8 @@ const express= require('express');
 const ejs= require('ejs');
 const bodyparser= require('body-parser');
 const nodemailer= require('nodemailer');
+let userEmail='itsmestevin29@gmail.com';
+let userPassword= 'stevin@2911';
 
 //Init Express
 const app= express();
@@ -32,6 +34,36 @@ app.post('/send',(req,res) =>{
         ${req.body.message}
     </p>
     `;
+
+            // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.googlemail.com',
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+            user: userEmail, // generated ethereal user
+            pass: userPassword, // generated ethereal password
+            },
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: `"Template Email" <${userEmail}>`, // sender address
+            to: `${req.body.email}`, // list of receivers
+            subject: "Test Email", // Subject line
+            text: "Hello world?", // plain text body
+            html: output, // html body
+        });
+
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+        // Preview only available when sending through an Ethereal account
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+
+        main().catch(console.error);
+
 });
 
 app.listen(PORT, () =>{
